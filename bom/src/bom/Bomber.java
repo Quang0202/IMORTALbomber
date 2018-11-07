@@ -184,7 +184,7 @@ public class Bomber extends MotionCharacter{
         for(int k = 0;k < boms.size();k ++)
             if(boms.elementAt(k).getI() == i
                     && boms.elementAt(k).getJ() == j
-                    && !((xx == i*sizeIcon) && (yy == j*sizeIcon)))//dieu kien bomber khong o trong bom
+                    && (abs(xx - j*sizeIcon) == sizeIcon || abs(yy - sizeTimeAndScore - i*sizeIcon) == sizeIcon))//dieu kien bomber khong o trong bom
         return true;
         return false;
     }
@@ -197,9 +197,15 @@ public class Bomber extends MotionCharacter{
             i ++;
         if((xx - j*sizeIcon) > nStepLimPutBom*step)
             j ++;
+        //khong cho dat 2 qua bom cung tai 1 vi tri
+        for(int k = 0;k < boms.size(); k ++){
+            if(boms.elementAt(k).getI() == i
+                    && boms.elementAt(k).getJ() == j)
+                return;
+        }
         boms.add(new Bomb(i, j, rangeExplosive));
-        allCharacter[i][j].setVisible(false);//an grass sau bom di
-        pane.add(boms.elementAt(nBom ++));
+//        allCharacter[i][j].setVisible(false);//an grass sau bom di
+        pane.add(boms.elementAt(nBom ++), 1);//chen sau bomber trong pane
     }
     //loai bo bom khoi man hinh
     public void removeBomb(Bomb b){

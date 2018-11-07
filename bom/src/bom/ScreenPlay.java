@@ -20,7 +20,7 @@ import javax.swing.JPanel;
  * @author Genius
  */
 public class ScreenPlay extends JFrame{
-    final static int sizeIcon = 16, sizeTimeAndScore = 20;
+    final static int sizeIcon = 32, sizeTimeAndScore = 40;
     private int width, height = 39;
     static Character[][] allCharacter;
     static Level lv;
@@ -39,41 +39,65 @@ public class ScreenPlay extends JFrame{
           pane.setLayout(null);
           for(int i = 0;i < row;i ++)
               for(int j = 0;j < column;j ++){
-                  if(Level.map[i].charAt(j) == '#')
+              switch (Level.map[i].charAt(j)) {
+                  case '#':
                       allCharacter[i][j] = new Wall(i, j);
-                  else if(Level.map[i].charAt(j) == '*')
+                      pane.add(allCharacter[i][j]);
+                      break;
+                  case '*':
                       allCharacter[i][j] = new Brick(i, j);
-                  else if(Level.map[i].charAt(j) == 'b')
+                      pane.add(allCharacter[i][j]);
+                      pane.add(new Grass(i, j));
+                      break;
+                  case 'b':
                       allCharacter[i][j] = new BombItem(i, j);
-                  else if(Level.map[i].charAt(j) == 'f')
+                      pane.add(allCharacter[i][j]);
+                      pane.add(new Grass(i, j));
+                      break;
+                  case 'f':
                       allCharacter[i][j] = new FlameItem(i, j);
-                  else if(Level.map[i].charAt(j) == 's')
+                      pane.add(allCharacter[i][j]);
+                      pane.add(new Grass(i, j));
+                      break;
+                  case 's':
                       allCharacter[i][j] = new SpeedItem(i, j);
-                  else if(Level.map[i].charAt(j) == 'x')
+                      pane.add(allCharacter[i][j]);
+                      pane.add(new Grass(i, j));
+                      break;
+                  case 'x':
                       allCharacter[i][j] = new Portal(i, j);
-                  //cac doi tuong dong duoc them vao frame truoc de khong bi de hinh
-                  else if(Level.map[i].charAt(j) == 'p'){
+                      pane.add(allCharacter[i][j]);
+                      pane.add(new Grass(i, j));
+                      break;
+                  case 'p':
                       allCharacter[i][j] = new Grass(i, j);
                       characterMain = new Bomber(i, j);
-                      pane.add(characterMain);
-                      continue;
-                  }
-                  else if(Level.map[i].charAt(j) == '1'){
+                      pane.add(allCharacter[i][j]);
+                      pane.add(new Grass(i, j));
+                      break;
+                  case '1':
                       allCharacter[i][j] = new Grass(i, j);
                       monster.add(new Ballom(i, j));
-                      pane.add(monster.elementAt(monster.size() - 1));
-                  }
-                  else if(Level.map[i].charAt(j) == '2'){
+                      pane.add(allCharacter[i][j]);
+                      pane.add(new Grass(i, j));
+                      break;
+                  case '2':
                       allCharacter[i][j] = new Grass(i, j);
                       monster.add(new Oneal(i, j));
-                      pane.add(monster.elementAt(monster.size() - 1));
-                  }
-                  else
+                      pane.add(allCharacter[i][j]);
+                      pane.add(new Grass(i, j));
+                      break;
+                  default:
                       allCharacter[i][j] = new Grass(i, j);
+                      pane.add(allCharacter[i][j]);
+                      pane.add(new Grass(i, j));
+                      break;
               }
-          for(int i = 0;i < row;i ++)
-              for(int j = 0;j < column;j ++)
-                  pane.add(allCharacter[i][j]); 
+              }
+          //cuoi cung la hinh nao co thu tu cao hon trong pane se hien thi truoc, met
+          for(int j = 0;j < monster.size();j ++)
+              pane.add(monster.elementAt(j), 0);
+          pane.add(characterMain, 0);
           settingsScreenPlay();
       }
 

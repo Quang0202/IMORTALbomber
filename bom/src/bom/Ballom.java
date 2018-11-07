@@ -8,6 +8,7 @@ package bom;
 import static bom.ScreenPlay.ic;
 import static bom.ScreenPlay.sizeIcon;
 import static bom.ScreenPlay.sizeTimeAndScore;
+import static java.lang.Math.random;
 
 /**
  *
@@ -58,6 +59,20 @@ public class Ballom extends Monster{
         this.setIcon(ic.iconBallomDead);
         this.Sleep(140);
         handlDead = true;
+    }
+
+    @Override
+    //viet linh tinh
+    public char AI(char[] statusCan, int nStatusCan){
+        for(int k = 0;k < nStatusCan;k ++)
+            if(status == statusCan[k])
+                return status;
+        return statusCan[(int)(random()*nStatusCan)];
+    }
+
+    @Override
+    public int caculateStep() {
+        return step;
     }
 }
         

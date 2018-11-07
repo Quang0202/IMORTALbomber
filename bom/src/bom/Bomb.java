@@ -126,7 +126,9 @@ public class Bomb extends MotionCharacter{
     public void setCycle(int cycle) {
         this.cycle = cycle;
     }
-    
+    public int getCycle(){
+        return cycle;
+    }
 
     public boolean updateBomb(){
         if(cycle == 0){
@@ -168,6 +170,7 @@ public class Bomb extends MotionCharacter{
         }
         //khi no xong tien hanh dat lai icon grass nhu luc ban dau
         else{
+            this.setVisible(false);
             for(int k = 0;k < nFlame;k ++){
                 int ti = (int)positionFlame.elementAt(k).getX();
                 int tj = (int)positionFlame.elementAt(k).getY();
@@ -209,6 +212,7 @@ public class Bomb extends MotionCharacter{
                 int tx = boms.elementAt(k).getXx();
                 int ty = boms.elementAt(k).getYy() - sizeTimeAndScore;
                 if(this.collisionMotionCharacter(tx, ty)){
+                    if(boms.elementAt(k).getCycle() != 0)
                     boms.elementAt(k).setCycle(0);
                 }
             }

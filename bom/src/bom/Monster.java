@@ -27,12 +27,8 @@ abstract public class Monster extends MotionCharacter{
     public abstract void settingsNewIcon();
     public abstract void destroy();
     //chon huong di phu hop trong tat ca cac huong phu hop cho truoc, tuy loai monster
-    public char AI(char[] statusCan, int nStatusCan){
-        for(int k = 0;k < nStatusCan;k ++)
-            if(status == statusCan[k])
-                return status;
-        return statusCan[(int)(random()*nStatusCan)];
-    }
+    public abstract char AI(char[] statusCan, int nStatusCan);
+    public abstract int caculateStep();
     //monster di chuyen
     public void move(){
         caculateStatus();
@@ -48,8 +44,9 @@ abstract public class Monster extends MotionCharacter{
         char[] statusCan = new char[4];
         int nStatusCan = 0;
         //tinh tat ca cac trang thai co the di chuyen
+        int stepMotion = caculateStep();//dung de dua ra toc do di chuyen cua monster tuy loai
         for(int k = 0;k < nStatus;k ++){
-            int[] arr = this.caculatePositionNew(xx, yy, allStatus[k], step);
+            int[] arr = this.caculatePositionNew(xx, yy, allStatus[k], stepMotion);
             if(monsterCanMove(arr[0], arr[1], allStatus[k])){
                 statusCan[nStatusCan ++] = allStatus[k];
             }
@@ -62,16 +59,16 @@ abstract public class Monster extends MotionCharacter{
         char direction = AI(statusCan, nStatusCan);
         switch (direction) {
                 case 'l':
-                    xx -= step;
+                    xx -= stepMotion;
                         break;
                 case 'r':
-                    xx += step;
+                    xx += stepMotion;
                     break;
                 case 'u':
-                    yy -= step;
+                    yy -= stepMotion;
                     break;
                 default:
-                    yy += step;
+                    yy += stepMotion;
                     break;
             }
         previousStatus = status;

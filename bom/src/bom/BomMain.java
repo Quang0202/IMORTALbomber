@@ -23,8 +23,6 @@ public class BomMain {
             ScreenPlay sc = new ScreenPlay();
             sc.setVisible(true);
             timePrevious = System.currentTimeMillis();
-            //kiem tra xem dung bao nhieu bo nho
-            System.out.println(Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory()/((double)1024*1024));
             while(true){
                 timePresent = System.currentTimeMillis();
                 if(timePresent - timePrevious > timeUpdateMin){
@@ -33,6 +31,7 @@ public class BomMain {
                 }
                 if(ScreenPlay.gameOver == true){
                     Sleep(500);
+                    //kiem tra xem dung bao nhieu bo nho
                     System.exit(0);
                 }
             }
