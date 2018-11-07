@@ -57,13 +57,16 @@ public class Ballom extends Monster{
     @Override
     public void destroy() {
         this.setIcon(ic.iconBallomDead);
-        this.Sleep(140);
-        handlDead = true;
+        nSecondStart ++;
+        if(nSecondStart == nSecondAfterDaed)
+            handlDead = true;
     }
 
     @Override
     //viet linh tinh
     public char AI(char[] statusCan, int nStatusCan){
+        if(nStatusCan >= 3)
+            return statusCan[(int)(random()*nStatusCan)];
         for(int k = 0;k < nStatusCan;k ++)
             if(status == statusCan[k])
                 return status;

@@ -5,7 +5,6 @@
  */
 package bom;
 
-import static bom.ScreenPlay.characterMain;
 import static bom.ScreenPlay.ic;
 import static bom.ScreenPlay.sizeIcon;
 import static bom.ScreenPlay.sizeTimeAndScore;
@@ -27,6 +26,8 @@ public class Oneal extends Monster{
     }
     @Override
     public char AI(char[] statusCan, int nStatusCan){
+        if(nStatusCan >= 3)
+            return statusCan[(int)(random()*nStatusCan)];
         for(int k = 0;k < nStatusCan;k ++)
             if(status == statusCan[k])
                 return status;
@@ -64,8 +65,9 @@ public class Oneal extends Monster{
     @Override
     public void destroy() {
         this.setIcon(ic.iconOnealDead);
-        Oneal.Sleep(140);
-        handlDead = true;
+        nSecondStart ++;
+        if(nSecondStart == nSecondAfterDaed)
+            handlDead = true;
     }
 
     @Override

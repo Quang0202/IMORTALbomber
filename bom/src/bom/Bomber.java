@@ -218,8 +218,9 @@ public class Bomber extends MotionCharacter{
         if(sttIconDead != ic.nIconBomberDead - 1)
             this.setIcon(ic.iconBomberDead[sttIconDead ++]);
         else{
+            nSecondStart ++;
+            if(nSecondStart == nSecondAfterDaed)
             handlDead = true;
-            Sleep(200);
         }
     }
 

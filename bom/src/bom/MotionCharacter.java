@@ -16,6 +16,7 @@ public abstract class MotionCharacter extends Character{
     protected char status = 'r', previousStatus = 'r';
     protected boolean dead = false;//cac nhan vat deu se co the chet
     protected boolean handlDead = false;//thong bao rang da an tang cho nhan vat xong khi chet
+    protected int nSecondAfterDaed = 7, nSecondStart = 0;
     public boolean isDead() {
         return dead;
     }
@@ -65,14 +66,5 @@ public abstract class MotionCharacter extends Character{
                 break;
         }
         return arr;
-    }
-    public static void Sleep(long lim){
-        long start = System.currentTimeMillis();
-        long endl;
-        while(true){
-            endl = System.currentTimeMillis();
-            if(endl - start >= lim)
-                return;
-        }
     }
 }

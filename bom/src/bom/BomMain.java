@@ -5,8 +5,6 @@
  */
 package bom;
 
-import static bom.MotionCharacter.Sleep;
-
 /**
  *
  * @author Genius
@@ -19,7 +17,7 @@ public class BomMain {
     public static void main(String[] args) {
         // TODO code application logic here
             long timePrevious, timePresent;
-            long timeUpdateMin = 90;
+            long timeUpdateMin = 100;
             ScreenPlay sc = new ScreenPlay();
             sc.setVisible(true);
             timePrevious = System.currentTimeMillis();
@@ -30,8 +28,6 @@ public class BomMain {
                     sc.update(timeUpdateMin);
                 }
                 if(ScreenPlay.gameOver == true){
-                    Sleep(500);
-                    //kiem tra xem dung bao nhieu bo nho
                     System.exit(0);
                 }
             }

@@ -8,7 +8,6 @@ package bom;
 import static bom.Bomber.boms;
 import static bom.Level.column;
 import static bom.Level.row;
-import static bom.MotionCharacter.Sleep;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Vector;
@@ -154,7 +153,6 @@ public class ScreenPlay extends JFrame{
         }
         //xu li khi thang game ne
         if(gameWin){
-            Sleep(500);
             System.exit(0);
         }
     }
