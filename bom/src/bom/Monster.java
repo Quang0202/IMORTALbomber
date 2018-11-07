@@ -9,9 +9,7 @@ import static bom.Bomber.boms;
 import static bom.ScreenPlay.allCharacter;
 import static bom.ScreenPlay.characterMain;
 import static bom.ScreenPlay.sizeIcon;
-import static bom.ScreenPlay.sizeTimeAndScore;
 import static java.lang.Math.abs;
-import static java.lang.Math.random;
 
 /**
  *
@@ -21,7 +19,7 @@ import static java.lang.Math.random;
 abstract public class Monster extends MotionCharacter{
     protected final char[] allStatus = {'l', 'r', 'u', 'd'};
     protected int nStatus = allStatus.length, step = sizeIcon/4;
-    protected final int nStepCollisionBomber = 2;
+    protected final int nStepCollisionBomber = 1;
     
     //thiet lap icon moi
     public abstract void settingsNewIcon();

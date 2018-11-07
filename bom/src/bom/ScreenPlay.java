@@ -25,6 +25,7 @@ public class ScreenPlay extends JFrame{
     static Level lv;
     static JPanel pane;
     static Icon ic;
+    @SuppressWarnings("unchecked")
     static Vector <Monster> monster = new Vector();
     static Bomber characterMain;
     static boolean gameOver = false, gameWin = false;

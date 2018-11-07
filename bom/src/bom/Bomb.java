@@ -204,7 +204,8 @@ public class Bomb extends MotionCharacter{
             int tx = monster.elementAt(k).getXx();
             int ty = monster.elementAt(k).getYy() - sizeTimeAndScore;
             //dung nhau chi khi cung hang hoac cot
-            monster.elementAt(k).setDead(this.collisionMotionCharacter(tx, ty));
+            if(this.collisionMotionCharacter(tx, ty))
+                monster.elementAt(k).setDead(true);
         }
         //co va phai qua bom khac hay khong
         for(int k = 0;k < boms.size();k ++){
@@ -220,7 +221,8 @@ public class Bomb extends MotionCharacter{
         //co va phai bomber khong
         int tx = characterMain.getXx();
         int ty = characterMain.getYy() - sizeTimeAndScore;
-        characterMain.setDead(this.collisionMotionCharacter(tx, ty));
+        if(this.collisionMotionCharacter(tx, ty))
+            characterMain.setDead(true);
     }
     //kiem tra xem monster, bomber co nam trong pham vi huy diet cua flame khong
     private boolean collisionMotionCharacter(int tx, int ty){
