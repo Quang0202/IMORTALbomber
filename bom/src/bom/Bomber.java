@@ -20,7 +20,7 @@ import java.util.Vector;
  * @author Genius
  */
 public class Bomber extends MotionCharacter{
-    private final int nStepLimitGo = 0, nStepLimPutBom = 1;
+    private final int nStepLimitGo = 2, nStepLimPutBom = 1;
     static Vector <Bomb> boms = new Vector();
     private int nBomMax = 1,nBom = 0, sttIconDead = 0, step = sizeIcon/4;
     private int numericalOrder = 0, rangeExplosive = 1;//hinh thu numerical order trong cac mang Up, Down,...
