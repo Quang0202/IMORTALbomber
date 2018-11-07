@@ -20,7 +20,11 @@ import javax.swing.JPanel;
  * @author Genius
  */
 public class ScreenPlay extends JFrame{
+<<<<<<< HEAD
     final static int sizeIcon = 32, sizeTimeAndScore = 40;
+=======
+    final static int sizeIcon = 32, sizeTimeAndScore = 20;
+>>>>>>> ecb4741a9f29ccbb2b1fd787947d1b5675a4cd7e
     private int width, height = 39;
     static Character[][] allCharacter;
     static Level lv;
