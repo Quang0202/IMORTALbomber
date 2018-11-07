@@ -15,7 +15,7 @@
 #  ** *   *    2              #
 ###############################
 
-da
+
 Mô tả cấu trúc tệp cấu hình màn chơi:
 1/ Dòng đầu tiên bao gồm 3 số nguyên L, R, C:
 L - số thứ tự màn chơi
