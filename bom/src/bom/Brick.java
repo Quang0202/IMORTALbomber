@@ -28,7 +28,6 @@ class Brick extends StaticCharacter{
             this.setIcon(ic.iconBrick[numericalOrder ++]);
         else{
             this.setIcon(ic.iconGrass);
-            nameObj = "Grass";
         }
     }
 }

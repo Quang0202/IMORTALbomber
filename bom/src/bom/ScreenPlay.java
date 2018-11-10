@@ -18,12 +18,13 @@ import javax.swing.JPanel;
  *
  * @author Genius
  */
-public class ScreenPlay extends JFrame{
-    final static int sizeIcon = 32, sizeTimeAndScore = 40;
+public class ScreenPlay extends JFrame  {
+    final static int sizeIcon = 32, sizeTimeAndScore = 50;
     private int width, height = 39;
+    private long timeGoBefore, timeBetweenTwoGo = 50;
     static Character[][] allCharacter;
     static Level lv;
-    static JPanel pane;
+    static JPanel pane = new JPanel();
     static Icon ic;
     @SuppressWarnings("unchecked")
     static Vector <Monster> monster = new Vector();
@@ -35,7 +36,7 @@ public class ScreenPlay extends JFrame{
           allCharacter = new Character[row][column];
           width = (column + 1)*sizeIcon;
           height += row*sizeIcon + sizeTimeAndScore;
-          pane = (JPanel) this.getContentPane();
+          this.add(pane);
           pane.setLayout(null);
           for(int i = 0;i < row;i ++)
               for(int j = 0;j < column;j ++){
@@ -98,6 +99,7 @@ public class ScreenPlay extends JFrame{
           for(int j = 0;j < monster.size();j ++)
               pane.add(monster.elementAt(j), 0);
           pane.add(characterMain, 0);
+          timeGoBefore = System.currentTimeMillis();
           settingsScreenPlay();
       }
 
@@ -107,18 +109,48 @@ public class ScreenPlay extends JFrame{
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.addKeyListener(new KeyAdapter() {
-            @Override
             //tu phim nhap vao cap nhat trang thai bomber
-            public void keyTyped(KeyEvent evt) {
-                char input = evt.getKeyChar();
+            @Override
+            public void keyPressed(KeyEvent e) {
+                int key = e.getKeyCode();
+                char input = ' ' ;
+                switch (key) {
+                    case KeyEvent.VK_DOWN:
+                    case KeyEvent.VK_S:
+                        input = 's';
+                        break;
+                    case KeyEvent.VK_UP:
+                    case KeyEvent.VK_W:
+                        input = 'w';
+                        break;
+                    case KeyEvent.VK_LEFT:
+                    case KeyEvent.VK_A:
+                        input = 'a';
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                    case KeyEvent.VK_D:
+                        input = 'd';
+                        break;
+                    case KeyEvent.VK_SPACE:
+                    case KeyEvent.VK_ENTER:
+                        input = 'l';
+                        break;
+                    default:
+                        break;
+                }
                 if(!characterMain.isDead())
                     if(input == 'w'|| input == 's'|| input == 'a'|| input == 'd'){
-                        characterMain.move(input);
+                        long timeGoPresent = System.currentTimeMillis();
+                        if(timeGoPresent - timeGoBefore >= timeBetweenTwoGo){
+                            timeGoBefore = timeGoPresent;
+                            characterMain.move(input);
+                        }
                     }
                 else if(input == 'l'){
                     characterMain.putBoms();
                 }
             }
+            
         });
     }
     private void updateBomb(){
@@ -137,6 +169,7 @@ public class ScreenPlay extends JFrame{
                 monster.elementAt(j).destroy();
                 if(monster.elementAt(j).isHandlDead()){
                     monster.elementAt(j).setVisible(false);
+                    pane.remove(monster.elementAt(j));
                     monster.remove(j);
                 }
             }

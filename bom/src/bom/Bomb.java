@@ -53,6 +53,7 @@ public class Bomb extends MotionCharacter{
                         break;
                     case "Brick":
                         brickDestroyed.add(new Point(i - 1 - k, j));
+                        allCharacter[i - 1 - k][j].setNameObj("Grass");
                         break OUTER;
                     default:
                         break OUTER;
@@ -69,6 +70,7 @@ public class Bomb extends MotionCharacter{
                         break;
                     case "Brick":
                         brickDestroyed.add(new Point(i + 1 + k, j));
+                        allCharacter[i + 1 + k][j].setNameObj("Grass");
                         break OUTER_1;
                     default:
                         break OUTER_1;
@@ -85,6 +87,7 @@ public class Bomb extends MotionCharacter{
                         break;
                     case "Brick":
                         brickDestroyed.add(new Point(i, j - 1 - k));
+                        allCharacter[i][j - 1 - k].setNameObj("Grass");
                         break OUTER_2;
                     default:
                         break OUTER_2;
@@ -101,6 +104,7 @@ public class Bomb extends MotionCharacter{
                         break;
                     case "Brick":
                         brickDestroyed.add(new Point(i, j + 1 + k));
+                        allCharacter[i][j + 1 + k].setNameObj("Grass");
                         break OUTER_3;
                     default:
                         break OUTER_3;

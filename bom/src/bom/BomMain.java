@@ -17,15 +17,15 @@ public class BomMain {
     public static void main(String[] args) {
         // TODO code application logic here
             long timePrevious, timePresent;
-            long timeUpdateMin = 100;
+            long timeUpdate = 100;
             ScreenPlay sc = new ScreenPlay();
             sc.setVisible(true);
             timePrevious = System.currentTimeMillis();
             while(true){
                 timePresent = System.currentTimeMillis();
-                if(timePresent - timePrevious > timeUpdateMin){
+                if(timePresent - timePrevious > timeUpdate){
                     timePrevious = timePresent;
-                    sc.update(timeUpdateMin);
+                    sc.update(timeUpdate);
                 }
                 if(ScreenPlay.gameOver == true){
                     System.exit(0);

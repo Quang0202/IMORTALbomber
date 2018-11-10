@@ -20,7 +20,7 @@ import java.util.Vector;
  * @author Genius
  */
 public class Bomber extends MotionCharacter{
-    private final int nStepLimitGo = 2, nStepLimPutBom = 1;
+    private final int rangeLimitGo = 0, rangeLimPutBom = 8;
     static Vector <Bomb> boms = new Vector();
     private int nBomMax = 1,nBom = 0, sttIconDead = 0, step = sizeIcon/4;
     private int numericalOrder = 0, rangeExplosive = 1;//hinh thu numerical order trong cac mang Up, Down,...
@@ -154,12 +154,12 @@ public class Bomber extends MotionCharacter{
                 if(status == 'l'
                         || status == 'r'){
                     int yOld = yy, yNew = (int)p[i].getX()*sizeIcon + sizeTimeAndScore;
-                    if(abs(yOld - yNew) > nStepLimitGo*step)
+                    if(abs(yOld - yNew) > rangeLimitGo)
                         ok = false;
                 }
                 else{
                     int xOld = xx, xNew = (int)p[i].getY()*sizeIcon;
-                    if(abs(xOld - xNew) > nStepLimitGo*step)
+                    if(abs(xOld - xNew) > rangeLimitGo)
                         ok = false;
                 }
                 //dieu kien bomber di tiep la thoa man, dat toa do moi cho bomber (chuan hoa toa do
@@ -193,9 +193,9 @@ public class Bomber extends MotionCharacter{
         if(nBom == nBomMax)
             return;
         int i = (yy - sizeTimeAndScore)/sizeIcon, j = xx/sizeIcon;
-        if((yy - sizeTimeAndScore - i*sizeIcon) > nStepLimPutBom*step)
+        if((yy - sizeTimeAndScore - i*sizeIcon) > rangeLimPutBom)
             i ++;
-        if((xx - j*sizeIcon) > nStepLimPutBom*step)
+        if((xx - j*sizeIcon) > rangeLimPutBom)
             j ++;
         //khong cho dat 2 qua bom cung tai 1 vi tri
         for(int k = 0;k < boms.size(); k ++){
@@ -204,7 +204,6 @@ public class Bomber extends MotionCharacter{
                 return;
         }
         boms.add(new Bomb(i, j, rangeExplosive));
-//        allCharacter[i][j].setVisible(false);//an grass sau bom di
         pane.add(boms.elementAt(nBom ++), 1);//chen sau bomber trong pane
     }
     //loai bo bom khoi man hinh
