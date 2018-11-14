@@ -5,10 +5,6 @@
  */
 package bom;
 
-import static bom.ScreenPlay.ic;
-import static bom.ScreenPlay.sizeIcon;
-import static bom.ScreenPlay.sizeTimeAndScore;
-
 /**
  *
  * @author Genius

@@ -10,6 +10,7 @@ import static bom.Level.column;
 import static bom.Level.row;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -31,6 +32,7 @@ public class ScreenPlay extends JFrame  {
     static Bomber characterMain;
     static boolean gameOver = false, gameWin = false;
     public ScreenPlay(){
+      
           ic = new Icon();
           lv = new Level();
           allCharacter = new Character[row][column];

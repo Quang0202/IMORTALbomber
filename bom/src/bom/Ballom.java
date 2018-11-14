@@ -8,6 +8,7 @@ package bom;
 import static bom.ScreenPlay.ic;
 import static bom.ScreenPlay.sizeIcon;
 import static bom.ScreenPlay.sizeTimeAndScore;
+import java.io.File;
 import static java.lang.Math.random;
 
 /**
@@ -56,6 +57,8 @@ public class Ballom extends Monster{
 
     @Override
     public void destroy() {
+        SoundPlayer music= new SoundPlayer(new File("getmoney.wav"));
+        music.play();
         this.setIcon(ic.iconBallomDead);
         nSecondStart ++;
         if(nSecondStart == nSecondAfterDaed)

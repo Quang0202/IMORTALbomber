@@ -13,6 +13,7 @@ import static bom.ScreenPlay.monster;
 import static bom.ScreenPlay.sizeIcon;
 import static bom.ScreenPlay.sizeTimeAndScore;
 import java.awt.Point;
+import java.io.File;
 import java.util.Vector;
 
 /**
@@ -36,7 +37,6 @@ public class Bomb extends MotionCharacter{
         xx = j*sizeIcon;
         yy = sizeTimeAndScore + i*sizeIcon;
         //tao cac tia lua (flame) khi bom no
-        this.addFlame();
         this.setBounds(xx, yy, sizeIcon, sizeIcon);
     }
     private void addFlame(){
@@ -136,6 +136,7 @@ public class Bomb extends MotionCharacter{
 
     public boolean updateBomb(){
         if(cycle == 0){
+           
             return false;
         }
         else{
@@ -150,7 +151,10 @@ public class Bomb extends MotionCharacter{
     public boolean explosionBomb(){
         boolean ok = false;
         //cho no bom qua cac giai doan
+//         SoundPlayer bomno=new SoundPlayer(new File("sound\\CannonClose.wav"));
+//            bomno.play();
         if(tStartExplosive == 0){
+            this.addFlame();
             allCharacter[i][j].setVisible(false);
             this.setIcon(ic.iconFlameCenter[tStartExplosive]);
             //lan no dau dat icon cho grass giong hinh flame, ap dung cho cac lan sau
