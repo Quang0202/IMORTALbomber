@@ -12,7 +12,6 @@ import static bom.ScreenPlay.pane;
 import static bom.ScreenPlay.sizeIcon;
 import static bom.ScreenPlay.sizeTimeAndScore;
 import java.awt.Point;
-import java.io.File;
 import static java.lang.Math.abs;
 import java.util.Vector;
 
@@ -21,9 +20,10 @@ import java.util.Vector;
  * @author Genius
  */
 public class Bomber extends MotionCharacter{
+    private static Sound sound = new Sound("getmoney.wav");
     private final int rangeLimitGo = 6, rangeLimPutBom = 8;
     static Vector <Bomb> boms = new Vector();
-    private int nBomMax = 2,nBom = 0, sttIconDead = 0, step = sizeIcon/4;
+    private int nBomMax = 1,nBom = 0, sttIconDead = 0, step = sizeIcon/4;
     private int numericalOrder = 0, rangeExplosive = 1;//hinh thu numerical order trong cac mang Up, Down,...
     //thiet lap tat ca hinh anh hoat hinh cua bomber
     public Bomber(int i, int j) {
@@ -215,8 +215,9 @@ public class Bomber extends MotionCharacter{
     }
 
     public void destroy() {
-         SoundPlayer music= new SoundPlayer(new File("getmoney.wav"));
-        music.play();
+        if(sttIconDead == 0){
+            sound.play(0);
+        }
         if(sttIconDead != ic.nIconBomberDead - 1)
             this.setIcon(ic.iconBomberDead[sttIconDead ++]);
         else{

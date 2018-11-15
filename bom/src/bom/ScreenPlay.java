@@ -171,7 +171,6 @@ public class ScreenPlay extends JFrame  {
                 monster.elementAt(j).destroy();
                 if(monster.elementAt(j).isHandlDead()){
                     monster.elementAt(j).setVisible(false);
-                    pane.remove(monster.elementAt(j));
                     monster.remove(j);
                 }
             }

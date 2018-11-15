@@ -5,8 +5,7 @@
  */
 package bom;
 
-import java.io.File;
-import javazoom.jl.decoder.JavaLayerException;
+import javax.sound.sampled.Clip;
 
 /**
  *
@@ -17,24 +16,25 @@ public class BomMain {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws JavaLayerException {
+    public static void main(String[] args){
         // TODO code application logic here
-            long timePrevious, timePresent;
-            long timeUpdate = 100;
-            ScreenPlay sc = new ScreenPlay();
-            sc.setVisible(true);
-            timePrevious = System.currentTimeMillis();
-            int t=0;
-            while(true){
-                timePresent = System.currentTimeMillis();
-                if(timePresent - timePrevious > timeUpdate){
-                    timePrevious = timePresent;
-                    sc.update(timeUpdate);
-                    
-                }
-                if(ScreenPlay.gameOver == true){
-                    System.exit(0);
-                }
+        Sound soundBase = new Sound("bomber.wav");
+        soundBase.play(Clip.LOOP_CONTINUOUSLY);
+        
+        long timePrevious, timePresent;
+        long timeUpdate = 100;
+        ScreenPlay sc = new ScreenPlay();
+        sc.setVisible(true);
+        timePrevious = System.currentTimeMillis();
+        while(true){
+            timePresent = System.currentTimeMillis();
+            if(timePresent - timePrevious > timeUpdate){
+                timePrevious = timePresent;
+                sc.update(timeUpdate);  
             }
+            if(ScreenPlay.gameOver == true){
+                System.exit(0);
+            }
+        }
     }
 }

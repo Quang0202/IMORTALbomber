@@ -13,7 +13,6 @@ import static bom.ScreenPlay.monster;
 import static bom.ScreenPlay.sizeIcon;
 import static bom.ScreenPlay.sizeTimeAndScore;
 import java.awt.Point;
-import java.io.File;
 import java.util.Vector;
 
 /**
@@ -23,6 +22,7 @@ import java.util.Vector;
 @SuppressWarnings("serial")
 public class Bomb extends MotionCharacter{
     protected int i, j;
+    private static Sound sound = new Sound("CannonClose.wav");
     private int nFlame, nBrick, cycle = 10, numericalOrder = 0, tExplosive = 3, tStartExplosive = 0, rangeExplosive;
     private int rangeLeft = 0, rangeRight = 0, rangeUp = 0, rangeDown = 0;
     Vector <Point> positionFlame = new Vector();
@@ -151,9 +151,8 @@ public class Bomb extends MotionCharacter{
     public boolean explosionBomb(){
         boolean ok = false;
         //cho no bom qua cac giai doan
-//         SoundPlayer bomno=new SoundPlayer(new File("sound\\CannonClose.wav"));
-//            bomno.play();
         if(tStartExplosive == 0){
+            sound.play(0);
             this.addFlame();
             allCharacter[i][j].setVisible(false);
             this.setIcon(ic.iconFlameCenter[tStartExplosive]);
