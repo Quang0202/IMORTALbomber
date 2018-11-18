@@ -10,7 +10,6 @@ import static bom.Level.column;
 import static bom.Level.row;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.File;
 import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -135,7 +134,7 @@ public class ScreenPlay extends JFrame  {
                         break;
                     case KeyEvent.VK_SPACE:
                     case KeyEvent.VK_ENTER:
-                        input = 'l';
+                        input = 'b';
                         break;
                     default:
                         break;
@@ -148,7 +147,7 @@ public class ScreenPlay extends JFrame  {
                             characterMain.move(input);
                         }
                     }
-                else if(input == 'l'){
+                else if(input == 'b'){
                     characterMain.putBoms();
                 }
             }

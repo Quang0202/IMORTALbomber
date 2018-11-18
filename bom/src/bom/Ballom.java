@@ -17,7 +17,7 @@ import static java.lang.Math.random;
 public class Ballom extends Monster{
     //thiet lap tat ca hoat hinh cua Ballom
     private int numericalOrder = 0;
-    private static Sound sound = new Sound("getmoney.wav");
+    private static Sound sound = new Sound("bup.wav");
     public Ballom(int i, int j) {
         this.setIcon(ic.iconBallom[0]);
         nameObj = "Ballom";

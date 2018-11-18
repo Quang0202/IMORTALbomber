@@ -18,7 +18,7 @@ public class BomMain {
      */
     public static void main(String[] args){
         // TODO code application logic here
-        Sound soundBase = new Sound("bomber.wav");
+        Sound soundBase = new Sound("bomber2.wav");
         soundBase.play(Clip.LOOP_CONTINUOUSLY);
         
         long timePrevious, timePresent;

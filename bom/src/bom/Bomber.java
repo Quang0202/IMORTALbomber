@@ -20,7 +20,8 @@ import java.util.Vector;
  * @author Genius
  */
 public class Bomber extends MotionCharacter{
-    private static Sound sound = new Sound("getmoney.wav");
+    private static Sound sound = new Sound("bup.wav");
+    private static Sound soundItem = new Sound("getmoney.wav");
     private final int rangeLimitGo = 6, rangeLimPutBom = 8;
     static Vector <Bomb> boms = new Vector();
     private int nBomMax = 1,nBom = 0, sttIconDead = 0, step = sizeIcon/4;
@@ -231,6 +232,7 @@ public class Bomber extends MotionCharacter{
             int jj = xx/sizeIcon;
             int ii = (yy - sizeTimeAndScore)/sizeIcon;
             if(allCharacter[ii][jj].getNameObj().equals("Items")){
+                soundItem.play(0);
                 Items it = (Items)allCharacter[ii][jj];
                 switch (it.getNameReal()) {
                     case "BombItem":
