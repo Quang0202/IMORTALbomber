@@ -16,15 +16,15 @@ public class Level {
     static int level, row, column;
     static String[] map;
 
-    public Level() {
-        loadFromFile();
+    public Level(int _lv) {
+        loadFromFile(_lv);
     }
     public int getLevel() {
         return level;
     }
     
-    public void loadFromFile(){
-        InputStream stream = BomMain.class.getResourceAsStream("/bom/resources/levels/Level1.txt");
+    public void loadFromFile(int _lv){
+        InputStream stream = BomMain.class.getResourceAsStream("/bom/resources/levels/Level" + _lv +".txt");
         try(Scanner sc = new Scanner(stream)) {
             level = Integer.parseInt(sc.nextLine());
             row = Integer.parseInt(sc.nextLine());

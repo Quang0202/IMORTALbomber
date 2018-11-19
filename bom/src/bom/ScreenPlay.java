@@ -12,6 +12,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Vector;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -19,31 +20,34 @@ import javax.swing.JPanel;
  * @author Genius
  */
 public class ScreenPlay extends JFrame  {
-    final static int sizeIcon = 32, sizeTimeAndScore = 50;
-    private int width, height = 39;
+    final static int sizeIcon = 32, sizeTimeAndScore = 25;
+    private int width, height = 36;
     private long timeGoBefore, timeBetweenTwoGo = 50;
     static Character[][] allCharacter;
     static Level lv;
     static JPanel pane = new JPanel();
-    static Icon ic;
-    @SuppressWarnings("unchecked")
+    private JLabel labelScore= new JLabel();
+    private JLabel labelLevel= new JLabel();
+    static Icon ic = new Icon();;
+    private int score=0;
     static Vector <Monster> monster = new Vector();
     static Bomber characterMain;
     static boolean gameOver = false, gameWin = false;
-    public ScreenPlay(){
+    public ScreenPlay(int _lv){
       
-          ic = new Icon();
-          lv = new Level();
+          
+          lv = new Level(_lv);
           allCharacter = new Character[row][column];
-          width = (column + 1)*sizeIcon;
+          width = (column)*sizeIcon+5;
           height += row*sizeIcon + sizeTimeAndScore;
+//          pane.setBackground(Color.BLACK);
           this.add(pane);
           pane.setLayout(null);
           for(int i = 0;i < row;i ++)
               for(int j = 0;j < column;j ++){
               switch (Level.map[i].charAt(j)) {
                   case '#':
-                      allCharacter[i][j] = new Wall(i, j);
+                      allCharacter[i][j] = new Wdall(i, j);
                       pane.add(allCharacter[i][j]);
                       break;
                   case '*':
@@ -107,6 +111,12 @@ public class ScreenPlay extends JFrame  {
     private void settingsScreenPlay() {
         this.setSize(width, height);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        labelScore.setText("Score: "+score);
+        labelScore.setBounds(15,0, 120,20);
+        labelLevel.setText("Level: "+Level.level);
+        labelLevel.setBounds(width-120,0,120,20);
+        pane.add(labelScore);
+        pane.add(labelLevel);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.addKeyListener(new KeyAdapter() {
@@ -169,6 +179,8 @@ public class ScreenPlay extends JFrame  {
             if(monster.elementAt(j).isDead()){
                 monster.elementAt(j).destroy();
                 if(monster.elementAt(j).isHandlDead()){
+                    score+=100;
+                    labelScore.setText("Score: " + score);
                     monster.elementAt(j).setVisible(false);
                     monster.remove(j);
                 }
@@ -187,7 +199,17 @@ public class ScreenPlay extends JFrame  {
         }
         //xu li khi thang game ne
         if(gameWin){
-            System.exit(0);
+            Level.level++;
         }
+    }
+    public void clear(){
+        allCharacter = null;
+        lv = null;
+        pane = new JPanel();
+        monster.removeAllElements();
+        characterMain = null;
+        Bomber.boms.removeAllElements();
+        gameOver = false;
+        gameWin = false;
     }
 }

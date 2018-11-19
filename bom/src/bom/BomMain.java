@@ -23,18 +23,44 @@ public class BomMain {
         
         long timePrevious, timePresent;
         long timeUpdate = 100;
-        ScreenPlay sc = new ScreenPlay();
-        sc.setVisible(true);
-        timePrevious = System.currentTimeMillis();
+        int lv = 1;
+        ScreenMenu menu= new ScreenMenu();
+        
         while(true){
-            timePresent = System.currentTimeMillis();
-            if(timePresent - timePrevious > timeUpdate){
-                timePrevious = timePresent;
-                sc.update(timeUpdate);  
+            System.out.print("");
+            if(menu.play == true){
+                menu.setVisible(false);
+                
+                ScreenPlay sc = new ScreenPlay(1);
+                sc.setVisible(true);
+                timePrevious = System.currentTimeMillis();
+                 while(true){
+                    timePresent = System.currentTimeMillis();
+                    if(timePresent - timePrevious > timeUpdate){
+                    timePrevious = timePresent;
+                     sc.update(timeUpdate);  
+                    }
+                    if(ScreenPlay.gameOver == true){
+                        sc.clear();
+                        sc.dispose();
+                        System.gc();
+                        menu.play = false;
+                        menu.setVisible(true);
+                        break;
+                    }
+                    if(ScreenPlay.gameWin == true){
+                        sc.clear();
+                        sc.dispose();
+                        System.gc();
+                        lv ++;
+                        sc = new ScreenPlay(lv);
+                        sc.setVisible(true);
+                    }
+                }
+        
             }
-            if(ScreenPlay.gameOver == true){
-                System.exit(0);
-            }
+           
         }
     }
+    
 }
