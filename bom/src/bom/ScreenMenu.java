@@ -27,7 +27,7 @@ public class ScreenMenu extends JFrame{
        
          panel.setLayout(null);
         JLabel label= new JLabel();
-        ImageIcon background = new ImageIcon("background.jpg");
+        ImageIcon background = new ImageIcon("menu2.jpg");
         label.setIcon(background);
         label.setBounds(0, 0, 1000, 600);
         panel.add(label);

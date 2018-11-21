@@ -10,7 +10,9 @@ import static bom.Level.column;
 import static bom.Level.row;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.Vector;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -47,7 +49,7 @@ public class ScreenPlay extends JFrame  {
               for(int j = 0;j < column;j ++){
               switch (Level.map[i].charAt(j)) {
                   case '#':
-                      allCharacter[i][j] = new Wdall(i, j);
+                      allCharacter[i][j] = new Wall(i, j);
                       pane.add(allCharacter[i][j]);
                       break;
                   case '*':
@@ -181,6 +183,11 @@ public class ScreenPlay extends JFrame  {
                 if(monster.elementAt(j).isHandlDead()){
                     score+=100;
                     labelScore.setText("Score: " + score);
+                    try {
+                        MaxScore maxscore= new MaxScore(score);
+                    } catch (IOException ex) {
+                        Logger.getLogger(ScreenPlay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    }
                     monster.elementAt(j).setVisible(false);
                     monster.remove(j);
                 }
