@@ -22,15 +22,15 @@ public class MaxScore {
       InputStream stream = BomMain.class.getResourceAsStream("/bom/resources/levels/maxscore.txt");
       Scanner sc= new Scanner(stream);
       s=sc.nextInt();
-        System.out.println(s);
       sc.close();
        if(score>s){
         File file = new File("src/bom/resources/levels/maxscore.txt");
         if(!file.exists())
            file.createNewFile();
-            FileWriter fw = new FileWriter(file.getAbsoluteFile(),true);
+            FileWriter fw = new FileWriter(file.getAbsoluteFile(),false);
             BufferedWriter bw =new BufferedWriter(fw);
-            bw.write(score);
+            String Score= String.valueOf(score);
+            bw.write(Score);
             bw.close();
        }
     }
