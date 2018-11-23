@@ -27,6 +27,75 @@ public class Oneal extends Monster{
     }
     @Override
     public char AI(char[] statusCan, int nStatusCan){
+        int tx = ScreenPlay.characterMain.getXx();
+        int ty = ScreenPlay.characterMain.getYy();
+        if(!ScreenPlay.characterMain.isDead())
+        if(tx%sizeIcon == 0
+            && xx%sizeIcon == 0){
+            int jj = tx/sizeIcon, jj1 = xx/sizeIcon;
+            if(jj == jj1){
+                boolean ok = true;
+                int ii = (ty - sizeTimeAndScore)/sizeIcon;
+                int ii1 = (yy - sizeTimeAndScore)/sizeIcon;
+                for(int k = Math.min(ii, ii1); k <= Math.max(ii, ii1); k ++)
+                    if(!ScreenPlay.allCharacter[k][jj].getNameObj().equals("Grass")){
+                        ok = false;
+                        break;
+                    }
+                if(ok == true){
+                    for(int k = 0;k < Bomber.boms.size();k ++){
+                        int jj2 = Bomber.boms.elementAt(k).getJ();
+                        if(jj2 == jj){
+                            int ii2 = Bomber.boms.elementAt(k).getI();
+                            if(ii2 >= Math.min(ii, ii1)
+                                    && ii2 <= Math.max(ii, ii1)){
+                                ok = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(ok == true){
+                    if(ty >= yy)
+                        return 'd';
+                    else
+                        return 'u';
+                }
+            }
+        }
+        else if((ty - sizeTimeAndScore)%sizeIcon == 0
+            && (yy - sizeTimeAndScore)%sizeIcon == 0){
+            int ii = (ty - sizeTimeAndScore)/sizeIcon, ii1 = (yy - sizeTimeAndScore)/sizeIcon;
+            if(ii == ii1){
+                boolean ok = true;
+                int jj = tx/sizeIcon;
+                int jj1 = xx/sizeIcon;
+                for(int k = Math.min(jj, jj1); k <= Math.max(jj, jj1); k ++)
+                    if(!ScreenPlay.allCharacter[ii][k].getNameObj().equals("Grass")){
+                        ok = false;
+                        break;
+                    }
+                if(ok == true){
+                    for(int k = 0;k < Bomber.boms.size();k ++){
+                        int ii2 = Bomber.boms.elementAt(k).getI();
+                        if(ii2 == ii){
+                            int jj2 = Bomber.boms.elementAt(k).getJ();
+                            if(jj2 >= Math.min(jj, jj1)
+                                    && jj2 <= Math.max(jj, jj1)){
+                                ok = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(ok == true){
+                    if(tx >= xx)
+                        return 'r';
+                    else
+                        return 'l';
+                }
+            }
+        }
         if(nStatusCan >= 3)
             return statusCan[(int)(random()*nStatusCan)];
         for(int k = 0;k < nStatusCan;k ++)
@@ -76,6 +145,8 @@ public class Oneal extends Monster{
 
     @Override
     public int caculateStep() {
-        return step;
+        int n = (int) (Math.random() * 3);
+        if(n == 0) return step;
+        return (int)1.5*step;
     }
 }

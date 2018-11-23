@@ -22,12 +22,15 @@ import java.util.Vector;
 public class Bomber extends MotionCharacter{
     private static Sound sound = new Sound("bup.wav");
     private static Sound soundItem = new Sound("getmoney.wav");
-    private final int rangeLimitGo = 6, rangeLimPutBom = 8;
+    private final int rangeLimitGo = 6, rangeLimPutBom = 8, rangeEatItem = 8;
     static Vector <Bomb> boms = new Vector();
     private int nBomMax = 1,nBom = 0, sttIconDead = 0, step = sizeIcon/4;
+    private Vector <Integer> allStepCan = new Vector<> ();
     private int numericalOrder = 0, rangeExplosive = 1;//hinh thu numerical order trong cac mang Up, Down,...
     //thiet lap tat ca hinh anh hoat hinh cua bomber
     public Bomber(int i, int j) {
+        for(int k = step;k >= 1;k --)
+            allStepCan.add(k);
         this.setIcon(ic.iconBomberRight[0]);
         nameObj = "Bomber";
         xx = j*sizeIcon;
@@ -72,19 +75,23 @@ public class Bomber extends MotionCharacter{
     //di chuyen bomber
     public void move(char input) {
         this.handlInput(input);
-        int[] arr = this.caculatePositionNew(xx, yy, status, step);
-        int tx = arr[0], ty = arr[1];
-        Point[] p = new Point[2];
-        int count = this.caculatePositionCanNext(tx, ty, p);
-        //xu li xem co den duoc o do khong
-        boolean canMove = this.BomberCanMove(tx, ty, count, p);
-        //thiet lap icon moi;
         this.settingsIconNew();
-        if(canMove){
-            //thiet lap vi tri moi
-            this.setBounds(xx, yy, sizeIcon, sizeIcon);
+        for(int k = 0;k < allStepCan.size();k ++){
+            int tStep = allStepCan.elementAt(k);
+            int[] arr = this.caculatePositionNew(xx, yy, status, tStep);
+            int tx = arr[0], ty = arr[1];
+            Point[] p = new Point[2];
+            int count = this.caculatePositionCanNext(tx, ty, p);
+            //xu li xem co den duoc o do khong
+            boolean canMove = this.BomberCanMove(tx, ty, count, p);
+            //thiet lap icon moi;
+            if(canMove){
+                //thiet lap vi tri moi
+                this.setBounds(xx, yy, sizeIcon, sizeIcon);
+                this.bomberHandlItemAndPortal();
+                return;
+            }
         }
-        this.bomberHandlItemAndPortal();
     }
     //tu ban phim cap nhat huong di bomber
     private void handlInput(char input){
@@ -231,7 +238,17 @@ public class Bomber extends MotionCharacter{
     private void bomberHandlItemAndPortal() {
             int jj = xx/sizeIcon;
             int ii = (yy - sizeTimeAndScore)/sizeIcon;
+            //tinh o an duoc item
+            if(abs(xx - jj*sizeIcon) > rangeEatItem)
+                jj ++;
+            if(abs(yy - sizeTimeAndScore - ii*sizeIcon) > rangeEatItem)
+                ii ++;
             if(allCharacter[ii][jj].getNameObj().equals("Items")){
+                //loai truong hop pham vi khong du de an item
+                if(abs(xx - jj*sizeIcon) > rangeEatItem)
+                    return;
+                if(abs(yy - sizeTimeAndScore - ii*sizeIcon) > rangeEatItem)
+                    return;
                 soundItem.play(0);
                 Items it = (Items)allCharacter[ii][jj];
                 switch (it.getNameReal()) {
@@ -243,6 +260,9 @@ public class Bomber extends MotionCharacter{
                         break;
                     default:
                         step = (int)(step*1.5);
+                        allStepCan.removeAllElements();
+                        for(int k = step;k >= 1;k --)
+                            allStepCan.add(k);
                         break;
                 }
                 it.setIcon(ic.iconGrass);
