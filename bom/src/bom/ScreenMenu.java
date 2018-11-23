@@ -36,15 +36,13 @@ public class ScreenMenu extends JFrame{
        
         panel.setLayout(null);
         JLabel label= new JLabel();
-        ImageIcon background = new ImageIcon("menu2.jpg");
+        ImageIcon background = new ImageIcon("src/bom/resources/icon/menu2.jpg");
         label.setIcon(background);
         label.setBounds(0, 0, 1000, 600);
-        panel.add(label);
-        
-        
         buttonStart();
         buttonMaxScore();
         buttonExit();
+        panel.add(label);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1000, 600);
@@ -53,10 +51,10 @@ public class ScreenMenu extends JFrame{
     }
     public void buttonStart(){
         start= new JButton();
-        start.setIcon(new ImageIcon("newgame.png"));
-        start.setBackground(Color.BLACK);
+        start.setIcon(new ImageIcon("src/bom/resources/icon/start.png"));
+        start.setBackground(Color.black);
         panel.add(start);
-        start.setBounds(450,200,206,35);
+        start.setBounds(400,200,240,39);
         start.addActionListener(new ActionListener() {
        
             @Override
@@ -67,17 +65,16 @@ public class ScreenMenu extends JFrame{
         start.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                start.setBackground(Color.BLACK);
+                start.setBackground(Color.black);
             }
         });
         start.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-               
             }
 
             @Override
-            public void mousePressed(MouseEvent e) {           
+            public void mousePressed(MouseEvent e) { 
             }
 
             @Override
@@ -98,9 +95,9 @@ public class ScreenMenu extends JFrame{
     }
    public void buttonMaxScore(){
         maxscore= new JButton();
-        maxscore.setIcon(new ImageIcon("newgame.png"));
+        maxscore.setIcon(new ImageIcon("src/bom/resources/icon/high score.png"));
         maxscore.setBackground(Color.BLACK);
-        maxscore.setBounds(450,250,206,35);
+        maxscore.setBounds(400,275,240,40);
         panel.add(maxscore);
       
         maxscore.addActionListener(new ActionListener() {
@@ -128,7 +125,7 @@ public class ScreenMenu extends JFrame{
             }
 
             @Override
-            public void mousePressed(MouseEvent e) {           
+            public void mousePressed(MouseEvent e) {
             }
 
             @Override
@@ -149,9 +146,9 @@ public class ScreenMenu extends JFrame{
     }
    public void buttonExit(){
         exit= new JButton();
-        exit.setIcon(new ImageIcon("newgame.png"));
+        exit.setIcon(new ImageIcon("src/bom/resources/icon/exit.png"));
         exit.setBackground(Color.BLACK);
-        exit.setBounds(450,300,206,35);
+        exit.setBounds(400,350,240,40);
         panel.add(exit);
        
         exit.addActionListener(new ActionListener() {
