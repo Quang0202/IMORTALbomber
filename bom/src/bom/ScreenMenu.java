@@ -109,7 +109,7 @@ public class ScreenMenu extends JFrame{
                 Scanner sc= new Scanner(stream);
                 s=sc.nextInt();
                 sc.close();
-                JOptionPane.showMessageDialog(null, "Điểm cao nhất hiện tại là "+s);
+                JOptionPane.showMessageDialog(null, "Điểm cao nhất hiện tại là "+s,"High Score",JOptionPane.INFORMATION_MESSAGE);
             }
         });
         maxscore.addChangeListener(new ChangeListener() {

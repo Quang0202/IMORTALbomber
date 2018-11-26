@@ -5,6 +5,7 @@
  */
 package bom;
 
+import java.io.BufferedInputStream;
 import java.io.InputStream;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -19,6 +20,7 @@ public class Sound {
     public Sound(String name){
         try {
             InputStream stream = this.getClass().getResourceAsStream("/bom/resources/sound/" + name);
+            InputStream Stream = new BufferedInputStream(stream);
             AudioInputStream audio = AudioSystem.getAudioInputStream(stream);
             clip = AudioSystem.getClip();
             clip.open(audio);

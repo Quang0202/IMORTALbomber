@@ -31,7 +31,7 @@ public class ScreenPlay extends JFrame  {
     private JLabel labelScore= new JLabel();
     private JLabel labelLevel= new JLabel();
     static Icon ic = new Icon();;
-    private int score=0;
+    static int score=0;
     static Vector <Monster> monster = new Vector();
     static Bomber characterMain;
     static boolean gameOver = false, gameWin = false;
@@ -181,8 +181,11 @@ public class ScreenPlay extends JFrame  {
             if(monster.elementAt(j).isDead()){
                 monster.elementAt(j).destroy();
                 if(monster.elementAt(j).isHandlDead()){
-                    score+=100;
-                    labelScore.setText("Score: " + score);
+                    if(monster.elementAt(j).nameObj=="Oneal")
+                         score+=200;
+                    else
+                        score+=100;
+                      labelScore.setText("Score: " + score);
                     try {
                         MaxScore maxscore= new MaxScore(score);
                     } catch (IOException ex) {
